@@ -1,0 +1,22 @@
+{
+  "bitwise": true,
+  "curly": true,
+  "eqeqeq": true,
+  "funcscope":true,
+  "immed": true,
+  "latedef": true,
+  "newcap": true,
+  "noarg": true,
+  "nocomma":true,
+  "shadow":false,
+  "strict":true,
+  "sub": true,
+  "undef": true,
+  "unused":true,
+  "eqnull":true,
+  "evil":true,
+  "boss": true,
+  "es5": true,
+  "node": true,
+  "-W117": true
+}
