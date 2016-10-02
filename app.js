@@ -1,26 +1,35 @@
-var express = require('express');
-var path = require('path');
-var favicon = require('serve-favicon');
-var logger = require('morgan');
-var cookieParser = require('cookie-parser');
-var bodyParser = require('body-parser');
+var path = require('path'),
+    restify = require('restify'),
+    fs = require('fs');
 
-var routes = require('./routes/index');
-var users = require('./routes/users');
+var server = restify.createServer({
+    certificate: fs.readFileSync('path/to/server/certificate'),
+    key: fs.readFileSync('path/to/server/key'),
+    name: 'WXApp'
+});
 
-var app = express();
-
-// view engine setup
-app.set('views', path.join(__dirname, 'views'));
-app.set('view engine', 'hbs');
-
-// uncomment after placing your favicon in /public
-//app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
-app.use(logger('dev'));
-app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: false }));
-app.use(cookieParser());
-app.use(express.static(path.join(__dirname, 'public')));
+server.listen(8080);
+//use plugins
+server.use(restify.acceptParser(server.acceptable));
+server.use(restify.authorizationParser());
+server.use(restify.dateParser());
+server.use(restify.queryParser());
+server.use(restify.jsonp());
+server.use(restify.gzipResponse());
+server.use(restify.bodyParser());
+server.use(restify.requestExpiry());
+server.use(restify.throttle({
+    burst: 100,
+    rate: 50,
+    ip: true,
+    overrides: {
+        '192.168.1.1': {
+            rate: 0,        // unlimited
+            burst: 0
+        }
+    }
+}));
+server.use(restify.conditionalRequest());
 
 app.use('/', routes);
 app.use('/users', users);
