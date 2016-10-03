@@ -1,9 +1,31 @@
-var express = require('express');
-var router = express.Router();
+var async = require('async'),
+    regiIndex  = require('./index'),
+    regiMine   = require('./mine'),
+    regiMore   = require('./more'),
+    regiProd   = require('./products');
 
-/* GET home page. */
-router.get('/', function(req, res, next) {
-  res.render('index', { title: 'Express' });
-});
 
-module.exports = router;
+
+module.exports = function(server){
+    async.parallel([
+        function(cb){
+            regiIndex(server);
+            cb(null);
+        },
+        function(cb){
+            regiProd(server);
+            cb(null);
+        },
+        function (cb) {
+            regiMine(server);
+            cb(null);
+        },
+        function(cb){
+            regiMore(server);
+            cb(null);
+        }],function(err){
+        if(!err){
+            console.log('------   routes registered completed  -----');
+        }
+    })
+};

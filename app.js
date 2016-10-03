@@ -1,8 +1,11 @@
 var path            = require('path'),
     restify         = require('restify'),
     fs              = require('fs'),
+    async           = require('async'),
     mongoose        = require('mongoose'),
-    registerPlugins = require('./plugins');
+    registerPlugins = require('./plugins'),
+    initRoute       = require('./routes'),
+    registerModels  = require('./models');
 
 
 //create server
@@ -12,14 +15,33 @@ var server = restify.createServer({
     name: 'WXApp'
 });
 
-//register server plugins
-registerPlugins(server);
 
-app.use('/', routes);
-app.use('/users', users);
+async.series({
+    
+    //register models
+    models:function(cb){
+        registerModels(mongoose);
+        cb(null);
+    },
+    //register server plugins
+    plugins:function(cb){
+        registerPlugins(server);
+        cb(null);
+    },
+    //initial server routes
+    routes:function(cb){
+        initRoute(server);
+        cb(null);
+    }
+    
+},function(err){
+    if(!err){
+        console.log("server init complete...");
+    }
+});
 
 // catch 404 and forward to error handler
-app.use(function (req, res, next) {
+server.use(function (req, res, next) {
     var err = new Error('Not Found');
     err.status = 404;
     next(err);
@@ -28,8 +50,8 @@ app.use(function (req, res, next) {
 // error handlers
 
 // development error handler
-if (app.get('env') === 'development') {
-    app.use(function (err, req, res, next) {
+if (server.get('env') === 'development') {
+    server.use(function (err, req, res, next) {
         res.status(err.status || 500);
         res.render('error', {
             message: err.message,
@@ -39,7 +61,7 @@ if (app.get('env') === 'development') {
 }
 
 // production error handler
-app.use(function (err, req, res, next) {
+server.use(function (err, req, res) {
     res.status(err.status || 500);
     res.render('error', {
         message: err.message,
@@ -48,4 +70,4 @@ app.use(function (err, req, res, next) {
 });
 server.listen(8080);
 
-module.exports = app;
+module.exports = server;
