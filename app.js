@@ -63,4 +63,5 @@ function normalizePort(val) {
 }
 var port = normalizePort(process.env.PORT || '8080');
 server.listen(port);
+console.log("server start at port"+port);
 
