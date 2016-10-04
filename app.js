@@ -16,7 +16,9 @@ process.env.currentEnv = 'dev';
 var server = restify.createServer({
     certificate: fs.readFileSync('path/to/server/certificate'),
     key: fs.readFileSync('path/to/server/key'),
-    name: 'WXApp'
+    name: 'WXApp',
+    log:'',//ToDo:bunyan instance,
+    formatters:''
 });
 
 
@@ -51,27 +53,14 @@ server.use(function (req, res, next) {
     next(err);
 });
 
-// error handlers
-
-// development error handler
-if (server.get('env') === 'development') {
-    server.use(function (err, req, res, next) {
-        res.status(err.status || 500);
-        res.render('error', {
-            message: err.message,
-            error: err
-        });
-    });
+function normalizePort(val) {
+    var port = parseInt(val, 10);
+    if (port >= 0) {
+        // port number
+        return port;
+    }
+    return false;
 }
+var port = normalizePort(process.env.PORT || '8080');
+server.listen(port);
 
-// production error handler
-server.use(function (err, req, res) {
-    res.status(err.status || 500);
-    res.render('error', {
-        message: err.message,
-        error: {}
-    });
-});
-server.listen(8080);
-
-module.exports = server;

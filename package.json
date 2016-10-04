@@ -8,12 +8,16 @@
   "dependencies": {
     "async": "^2.0.1",
     "bunyan": "^1.8.1",
+    "client-sessions": "^0.7.0",
+    "gridfs-stream": "^1.1.1",
     "mongoose": "^4.6.2",
+    "multer": "^1.2.0",
+    "node-uuid": "^1.4.7",
     "redis": "^2.6.2",
+    "request": "^2.75.0",
     "restify": "^4.1.1"
   },
   "devDependencies": {
-    "nodemon": "^1.10.2",
-    "request": "^2.75.0"
+    "nodemon": "^1.10.2"
   }
 }
