@@ -9,5 +9,9 @@ var fileOperator = require('./file'),
 
 
 module.exports = {
-
+    fileOperator:fileOperator,
+    logger:logger,
+    mongoOperator:mongoOperator,
+    redisOperator:redisOperator,
+    request:request
 };
