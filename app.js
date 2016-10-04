@@ -8,6 +8,10 @@ var path            = require('path'),
     registerModels  = require('./models');
 
 
+//set node env
+process.env.currentEnv = 'dev';
+//process.env.currentEnv = 'proc';
+
 //create server
 var server = restify.createServer({
     certificate: fs.readFileSync('path/to/server/certificate'),

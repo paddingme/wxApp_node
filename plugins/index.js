@@ -10,8 +10,6 @@ var restify = require('restify');
 //
 //}
 
-
-
 /**
  *
  * @param server
