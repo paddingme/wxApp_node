@@ -17,10 +17,10 @@ mongoCon.once('connect',function(){
 });
 
 function getMongoConnection(){
-    var opts = currentConfig.mongo.opts;
-    var host = currentConfig.mongo.host;
-    var port = currentConfig.mongo.port;
-    var db   = currentConfig.mongo.db;
+    var opts = currentConfig.mongo.wxApp_xuXuanHui.opts;
+    var host = currentConfig.mongo.wxApp_xuXuanHui.host;
+    var port = currentConfig.mongo.wxApp_xuXuanHui.port;
+    var db   = currentConfig.mongo.wxApp_xuXuanHui.db;
     var mongoCon =  mongoose.createConnection(host, db, port, opts);
     if(mongoCon){
         return mongoCon;
@@ -30,6 +30,19 @@ function getMongoConnection(){
     }
 }
 
+function getMongoLogConnection(){
+    var opts = currentConfig.mongo.wxApp_xuXuanHui_log.opts;
+    var host = currentConfig.mongo.wxApp_xuXuanHui_log.host;
+    var port = currentConfig.mongo.wxApp_xuXuanHui_log.port;
+    var db   = currentConfig.mongo.wxApp_xuXuanHui_log.db;
+    var mongoCon =  mongoose.createConnection(host, db, port, opts);
+    if(mongoCon){
+        return mongoCon;
+    }else if(currentConfig.log=="file"){
+        //ToDo:记录链接失败日志
+        console.log("connection failed");
+    }
+}
 function getRedisClient(){
 
     var client = redis.createClient(currentConfig.redis.port,currentConfig.redis.host);
@@ -53,5 +66,7 @@ function getRedisClient(){
 }
 module.exports = {
     mongoConnection:getMongoConnection(),
-    redisClient:getRedisClient()
+    mongoLogConnection:getMongoLogConnection(),
+    redisClient:getRedisClient(),
+    currentEnv :currentConfig
 };

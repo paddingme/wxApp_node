@@ -5,20 +5,24 @@ var path            = require('path'),
     mongoose        = require('mongoose'),
     registerPlugins = require('./plugins'),
     initRoute       = require('./routes'),
-    registerModels  = require('./models');
+    registerModels  = require('./models'),
+    registerEventListener = require('./serverEventListener'),
+    logger          = require('./modules').log.logger;
 
 
 //set node env
 process.env.currentEnv = 'dev';
 //process.env.currentEnv = 'proc';
 
+console.log("creating server。。。");
+
 //create server
 var server = restify.createServer({
-    certificate: fs.readFileSync('path/to/server/certificate'),
-    key: fs.readFileSync('path/to/server/key'),
-    name: 'WXApp',
-    log:'',//ToDo:bunyan instance,
-    formatters:''
+    //certificate: fs.readFileSync('path/to/server/certificate'),
+    //key: fs.readFileSync('path/to/server/key'),
+    name: 'WXApp_xuXuanHui',
+    log:logger
+    //formatters:''
 });
 
 
@@ -32,6 +36,11 @@ async.series({
     //register server plugins
     plugins:function(cb){
         registerPlugins(server);
+        cb(null);
+    },
+    //register server event listener
+    listener: function (cb) {
+        registerEventListener(server);
         cb(null);
     },
     //initial server routes

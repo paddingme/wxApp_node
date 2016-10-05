@@ -4,14 +4,27 @@
 module.exports = {
     dev: {
         mongo: {
-            host: "127.0.0.1",
-            port: "27017",
-            db: "wxApp_xuXuanHui",
-            opts: {
-                user: "",
-                pass: "",
-                poolSize: 6
+            wxApp_xuXuanHui:{
+                host: "127.0.0.1",
+                port: "27017",
+                db: "wxApp_xuXuanHui",
+                opts: {
+                    user: "",
+                    pass: "",
+                    poolSize: 6
+                }
+            },
+            wxApp_xuXuanHui_log:{
+                host: "127.0.0.1",
+                port: "27017",
+                db: "wxApp_xuXuanHui",
+                opts: {
+                    user: "",
+                    pass: ""
+                }
             }
+
+
 
         },
         redis: {
@@ -25,13 +38,24 @@ module.exports = {
     },
     proc: {
         mongo: {
-            host: "127.0.0.1",
-            port: "27017",
-            db: "",
-            opts: {
-                user: "",
-                pass: "",
-                poolSize: 6
+            wxApp_xuXuanHui:{
+                host: "127.0.0.1",
+                port: "27017",
+                db: "wxApp_xuXuanHui",
+                opts: {
+                    user: "",
+                    pass: "",
+                    poolSize: 6
+                }
+            },
+            wxApp_xuXuanHui_log:{
+                host: "127.0.0.1",
+                port: "27017",
+                db: "wxApp_xuXuanHui_log",
+                opts: {
+                    user: "",
+                    pass: ""
+                }
             }
         },
         redis: {

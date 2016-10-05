@@ -2,7 +2,7 @@
  * Created  on 10/4/2016.
  */
 var fileOperator = require('./file'),
-    logger        = require('./logger'),
+    log       = require('./logger'),
     mongoOperator = require('./mongo'),
     redisOperator = require('./redis'),
     request       = require('./request');
@@ -10,7 +10,7 @@ var fileOperator = require('./file'),
 
 module.exports = {
     fileOperator:fileOperator,
-    logger:logger,
+    log:log,
     mongoOperator:mongoOperator,
     redisOperator:redisOperator,
     request:request

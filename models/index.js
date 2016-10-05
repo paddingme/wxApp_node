@@ -2,13 +2,13 @@
  * Created  on 10/2/2016.
  */
 var async = require('async'),
-    user   = require('./user');
+    regiUserModel  = require('./user');
 
 
 module.exports = function (mongoose) {
     async.parallel({
         user:function(cb){
-            user(mongoose);
+            regiUserModel(mongoose);
             cb(null);
         }
     },function(err){
