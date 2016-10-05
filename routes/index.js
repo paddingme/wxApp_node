@@ -24,7 +24,7 @@ module.exports = function(server){
         //    cb(null);
         }],function(err){
         if(!err){
-            console.log('------   routes registered completed  -----');
+            console.log('------   server routes registered completed  -----');
         }
     })
 };

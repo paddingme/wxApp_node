@@ -4,7 +4,6 @@ var path            = require('path'),
     async           = require('async'),
     registerPlugins = require('./plugins'),
     initRoute       = require('./routes'),
-    registerModels  = require('./models'),
     registerEventListener = require('./serverEventListener'),
     logger          = require('./modules').log.logger;
 
@@ -25,12 +24,6 @@ var server = restify.createServer({
 
 
 async.series({
-    
-    //register models
-    models:function(cb){
-        registerModels();
-        cb(null);
-    },
     //register server plugins
     plugins:function(cb){
         registerPlugins(server);

@@ -16,10 +16,6 @@ function getMongoConnection(){
     mongoCon.on('error',function(){
         console.log("Error:failed to create connection to DB 'wxApp_xuXuanHui' server");
     });
-    mongoCon.once('open',function(){
-        console.log("Success：connected to DB 'wxApp_xuXuanHui' server for the first time");
-    });
-
 
     if(mongoCon){
         return mongoCon;
@@ -44,9 +40,6 @@ function getMongoLogConnection(){
     mongoCon.on('error',function(){
         console.log("Error:failed to create connection to DB 'wxApp_xuXuanHui_log' server");
     });
-    //mongoCon.once('open',function(){
-    //    console.log("Success：connected to DB 'wxApp_xuXuanHui_log' server for the first time");
-    //});
 }
 function getRedisClient(){
 

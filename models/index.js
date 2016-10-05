@@ -2,20 +2,34 @@
  * Created  on 10/2/2016.
  */
 var async = require('async'),
-    mongoose = require('mongoose'),
-    db = require('../db'),
-    regiUserModel = require('./user');
+    logger = require('../modules').log;
+var modelsMap = [
+    {
+        modelName:'user',
+        fileUrl:'./user'
+    },
+    {
+        modelName:'log',
+        fileUrl:'./log'
+    }
+];
 
-module.exports = function () {
-    async.parallel({
-        user: function (cb) {
-            var connection = db.getMongoConnection();
-            regiUserModel(connection, mongoose);
-            cb(null);
+
+function getModel(name){
+    async.forEach(modelsMap, function (item) {
+        if(item.modelName===name){
+            return require(item.fileUrl).model;
         }
     }, function (err) {
-        if (!err) {
-            console.log("---- mongodb models have been registered. ----");
+        if(err){
+            console.log("model isn't exist");
+            //ToDo:记录日志
         }
-    });
+    })
+}
+module.exports = {
+    getModel:getModel
 };
+
+
+
