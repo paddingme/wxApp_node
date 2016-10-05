@@ -3,6 +3,7 @@
  */
 
 module.exports = function (DBConnection,mongoose){
+
     var userSchema = mongoose.Schema({
         openId: {type:String,required:true,trim:true},
         nickName: {type:String,required:true,trim:true},
@@ -17,4 +18,5 @@ module.exports = function (DBConnection,mongoose){
         }
     });
     DBConnection.model('user',userSchema);
+
 };

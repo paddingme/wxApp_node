@@ -2,10 +2,8 @@ var path            = require('path'),
     restify         = require('restify'),
     fs              = require('fs'),
     async           = require('async'),
-    mongoose        = require('mongoose'),
     registerPlugins = require('./plugins'),
     initRoute       = require('./routes'),
-    DBConnection    = require('./db'),
     registerModels  = require('./models'),
     registerEventListener = require('./serverEventListener'),
     logger          = require('./modules').log.logger;
@@ -30,7 +28,7 @@ async.series({
     
     //register models
     models:function(cb){
-        registerModels(DBConnection,mongoose);
+        registerModels();
         cb(null);
     },
     //register server plugins
@@ -72,5 +70,5 @@ function normalizePort(val) {
 }
 var port = normalizePort(process.env.PORT || '8080');
 server.listen(port);
-console.log("Success:server start at port"+port);
+console.log("Success:server start at port "+port);
 
