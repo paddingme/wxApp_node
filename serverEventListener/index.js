@@ -12,15 +12,11 @@ module .exports = function(server){
     server.on('InvalidHeader',serverEventHandler.invalidHeaderHandler);
     //handle RequestExpired
     server.on('RequestExpired',serverEventHandler.requestExpiredHandler);
-
     //handle MethodNotAllowed event
     server.on('MethodNotAllowed',serverEventHandler.methodNotAllowedHandler);
-
     //handle VersionNotAllowed event
     server.on('VersionNotAllowed',serverEventHandler.versionNotAllowedHandler);
-
     //handle UnsupportedMediaType event
-
     server.on('UnsupportedMediaType',serverEventHandler.unsupportedMediaTypeHandler);
     // handle RequestTimeout
     server.on('RequestTimeout',serverEventHandler.timeOutHandler);
@@ -28,14 +24,13 @@ module .exports = function(server){
     server.on('TooManyRequests',serverEventHandler.tooManyRequest);
     //handle InternalServer
     server.on('InternalServer',serverEventHandler.internalServerHandler);
-
     //handle ServiceUnavailable
     server.on('ServiceUnavailable',serverEventHandler.serviceUnavailableHandler);
     //handle after event
     server.on('after', function (req,res,route,err) {
 
     });
-
     //handle uncaughtException event
     server.on('uncaughtException',serverEventHandler.uncaughtExceptionHandler);
+    console.log("------ server's events are listening. -----")
 };

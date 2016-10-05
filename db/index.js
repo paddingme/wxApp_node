@@ -7,21 +7,20 @@ var mongoose = require('mongoose'),
 
 var currentConfig = process.env.currentEnv=='dev'?config.dev:config.proc;
 
-var mongoCon = mongoose.connect;
-
-mongoCon.on('error',function(){
-    console.log("Error:failed to create connection to mongoDB server");
-});
-mongoCon.once('connect',function(){
-    console.log("Success：connected to mongoDB sever for the first time");
-});
-
 function getMongoConnection(){
     var opts = currentConfig.mongo.wxApp_xuXuanHui.opts;
     var host = currentConfig.mongo.wxApp_xuXuanHui.host;
     var port = currentConfig.mongo.wxApp_xuXuanHui.port;
     var db   = currentConfig.mongo.wxApp_xuXuanHui.db;
     var mongoCon =  mongoose.createConnection(host, db, port, opts);
+    mongoCon.on('error',function(){
+        console.log("Error:failed to create connection to DB 'wxApp_xuXuanHui' server");
+    });
+    mongoCon.once('open',function(){
+        console.log("Success：connected to DB 'wxApp_xuXuanHui' server for the first time");
+    });
+
+
     if(mongoCon){
         return mongoCon;
     }else if(currentConfig.log=="file"){
@@ -42,6 +41,12 @@ function getMongoLogConnection(){
         //ToDo:记录链接失败日志
         console.log("connection failed");
     }
+    mongoCon.on('error',function(){
+        console.log("Error:failed to create connection to DB 'wxApp_xuXuanHui_log' server");
+    });
+    mongoCon.once('open',function(){
+        console.log("Success：connected to DB 'wxApp_xuXuanHui_log' server for the first time");
+    });
 }
 function getRedisClient(){
 

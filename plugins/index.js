@@ -24,7 +24,7 @@ module.exports = function(server){
     server.use(restify.jsonp());
     server.use(restify.gzipResponse());
     server.use(restify.bodyParser());
-    server.use(restify.requestExpiry());
+    //server.use(restify.requestExpiry());
     server.use(restify.throttle({
         burst: 100,
         rate: 50,
@@ -37,4 +37,5 @@ module.exports = function(server){
         }
     }));
     server.use(restify.conditionalRequest());
+    console.log('---- server plugins have been registered  ----');
 };

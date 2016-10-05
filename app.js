@@ -5,6 +5,7 @@ var path            = require('path'),
     mongoose        = require('mongoose'),
     registerPlugins = require('./plugins'),
     initRoute       = require('./routes'),
+    DBConnection    = require('./db'),
     registerModels  = require('./models'),
     registerEventListener = require('./serverEventListener'),
     logger          = require('./modules').log.logger;
@@ -14,7 +15,6 @@ var path            = require('path'),
 process.env.currentEnv = 'dev';
 //process.env.currentEnv = 'proc';
 
-console.log("creating server。。。");
 
 //create server
 var server = restify.createServer({
@@ -30,7 +30,7 @@ async.series({
     
     //register models
     models:function(cb){
-        registerModels(mongoose);
+        registerModels(DBConnection,mongoose);
         cb(null);
     },
     //register server plugins
@@ -72,5 +72,5 @@ function normalizePort(val) {
 }
 var port = normalizePort(process.env.PORT || '8080');
 server.listen(port);
-console.log("server start at port"+port);
+console.log("Success:server start at port"+port);
 

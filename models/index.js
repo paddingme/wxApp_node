@@ -4,16 +4,15 @@
 var async = require('async'),
     regiUserModel  = require('./user');
 
-
-module.exports = function (mongoose) {
+module.exports = function (DBConnection,mongoose) {
     async.parallel({
         user:function(cb){
-            regiUserModel(mongoose);
+            regiUserModel(DBConnection.mongoConnection,mongoose);
             cb(null);
         }
     },function(err){
         if(!err){
-            console.log("models have been registered.");
+            console.log("---- mongodb models have been registered. ----");
         }
     })
 };

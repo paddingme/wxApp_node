@@ -6,7 +6,8 @@ var logger = require('../modules').logger;
 function ServerErrorHandler(){}
 
 ServerErrorHandler.notFoundHandler = function(req,res,err){
-
+    res.send("not found");
+    next();
 };
 
 /**
