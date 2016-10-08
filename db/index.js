@@ -66,11 +66,15 @@ function getRedisClient(){
 
 
 function getHerokuMongoConnnection(){
-    
+    var herokuMongoConnection = mongoose.createConnection(currentConfig.mongo);
+    if(herokuMongoConnection){
+        return herokuMongoConnection;
+    }
 }
 
 function getHerokuRedisClient(){
-
+    return redis.createClient(process.env.REDIS_URL);
+    //return redis.createClient(currentConfig.redis);
 }
 module.exports = {
     getMongoConnection:getMongoConnection,

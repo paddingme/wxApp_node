@@ -68,7 +68,7 @@ module.exports = {
         //log:'file'
     },
     heroku:{
-        mongo:'',
-        redis:''
+        mongo:'mongodb://heroku_2q6b3310:t0gpmgbj6a7mded1shr4up37bp@ds053176.mlab.com:53176/heroku_2q6b3310',
+        redis:'redis://h:p22e1bn11hsh9ab9ar412hnc37s@ec2-23-23-233-73.compute-1.amazonaws.com:31109'
     }
 };
