@@ -2,7 +2,8 @@
  * Created  on 10/4/2016.
  */
 
-var client = require('../db').redisClient;
+//var client = require('../db').redisClient;
+var client = require('../db').getHerokuRedisClient;
 
 function RedisOperator(){}
 

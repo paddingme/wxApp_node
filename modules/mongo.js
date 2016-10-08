@@ -1,7 +1,9 @@
 /**
  * Created  on 10/4/2016.
  */
-var mongoConn = require('../db').mongoConnection;
+//var mongoConn = require('../db').mongoConnection;
+var mongoConn = require('../db').getHerokuMongoConnnection;
+
 
 function MongoOperator(){}
 

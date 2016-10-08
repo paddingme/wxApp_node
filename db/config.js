@@ -32,9 +32,8 @@ module.exports = {
             port: '6379',
             password:""
         },
-        //日志存储类型  file或db
-        //存储到文件
-        log: "file"
+        //打印日志输出
+        log: "stdout"
     },
     proc: {
         mongo: {
@@ -65,5 +64,11 @@ module.exports = {
         },
         //日志存储到数据库中
         log: "db"
+        //日志存储到文件中
+        //log:'file'
+    },
+    heroku:{
+        mongo:'',
+        redis:''
     }
 };

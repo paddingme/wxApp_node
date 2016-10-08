@@ -9,7 +9,7 @@ var path            = require('path'),
 
 
 //set node env
-process.env.currentEnv = 'dev';
+process.env.currentEnv = 'heroku';
 //process.env.currentEnv = 'proc';
 
 
