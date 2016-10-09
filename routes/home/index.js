@@ -10,7 +10,7 @@ var async    = require('async'),
 module.exports = function(server){
     server.post('/login',login);
     server.get('/',function(req,res,next){
-        res.send('hello restiy...');
+        res.send('hello restify...');
         next();
     })
 };

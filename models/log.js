@@ -15,5 +15,6 @@ var logSchema = mongoose.Schema({
     time: {type: Date, required: true, default: new Date()}
     //req,res,ip,req(body),user_id,isVisitor...
 });
-Log.model = db.getMongoLogConnection().model('log',logSchema);
+// Log.model = db.getMongoLogConnection().model('log',logSchema);
+Log.model = db.getHerokuMongoConnnection().model('log',logSchema);
 module.exports = Log;
