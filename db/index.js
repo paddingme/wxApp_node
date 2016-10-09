@@ -73,8 +73,8 @@ function getHerokuMongoConnnection(){
 }
 
 function getHerokuRedisClient(){
-    return redis.createClient(process.env.REDIS_URL);
-    //return redis.createClient(currentConfig.redis);
+    //return redis.createClient(process.env.REDIS_URL);
+    return redis.createClient(currentConfig.redis);
 }
 module.exports = {
     getMongoConnection:getMongoConnection,
