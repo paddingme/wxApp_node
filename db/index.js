@@ -5,8 +5,8 @@ var mongoose = require('mongoose'),
     redis     = require('redis'),
     config    = require('./config');
 
-//var currentConfig = process.env.currentEnv=='dev'?config.dev:config.proc;
-var currentConfig = config.heroku;
+var currentConfig = process.env.currentEnv=='dev'?config.dev:config.proc;
+
 
 function getMongoConnection(){
     var opts = currentConfig.mongo.wxApp_xuXuanHui.opts;
@@ -65,22 +65,9 @@ function getRedisClient(){
 }
 
 
-function getHerokuMongoConnnection(){
-    var herokuMongoConnection = mongoose.createConnection(currentConfig.mongo);
-    if(herokuMongoConnection){
-        return herokuMongoConnection;
-    }
-}
-
-function getHerokuRedisClient(){
-    //return redis.createClient(process.env.REDIS_URL);
-    return redis.createClient(currentConfig.redis);
-}
 module.exports = {
     getMongoConnection:getMongoConnection,
     getMongoLogConnection:getMongoLogConnection,
     getRedisClient:getRedisClient,
-    getHerokuMongoConnnection:getHerokuMongoConnnection,
-    getHerokuRedisClient:getHerokuRedisClient,
     logType :currentConfig.log
 };
