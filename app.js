@@ -11,6 +11,8 @@ var path            = require('path'),
 //set node env
 process.env.currentEnv = 'heroku';
 //process.env.currentEnv = 'proc';
+//process.env.currentEnv = 'dev';
+
 
 
 //create server
@@ -61,7 +63,7 @@ function normalizePort(val) {
     }
     return false;
 }
-var port = normalizePort(process.env.PORT || '8080');
+var port = normalizePort(process.env.PORT || '80');
 server.listen(port);
 console.log("Success:server start at port "+port);
 

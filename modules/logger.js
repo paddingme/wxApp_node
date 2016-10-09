@@ -2,6 +2,7 @@
  * Created  on 10/2/2016.
  */
 var bunyan = require('bunyan'),
+    path    = require('path'),
     logType = require('../db').logType;
 
 var Logger = bunyan.createLogger({
@@ -14,7 +15,7 @@ var Logger = bunyan.createLogger({
         },
         {
             level: 'error',
-            path: '/var/tmp/myapp-error.log'
+            path: path.resolve(__dirname,'../logs/webError.log')
         }
     ]
     });
