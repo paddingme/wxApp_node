@@ -9,7 +9,7 @@ var mongoErrorHandler = require('./mongoErrorHandler'),
 
 module.exports = {
     handleServerError:serverErrorHandler,
-    handleRedisErrot:redisErrorHandler,
+    handleRedisError:redisErrorHandler,
     handleMongoError:mongoErrorHandler
 
 };

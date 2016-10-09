@@ -27,7 +27,8 @@ module.exports = {
         redis: {
             host: '127.0.0.1',
             port: '6379',
-            password:""
+            password:"",
+            db:''
         },
         //打印日志输出
         log: "stdout"
@@ -57,7 +58,8 @@ module.exports = {
         redis: {
             host: "",
             port: "",
-            password:""
+            password:"",
+            db:''
         },
         //日志存储到数据库中
         log: "db"
