@@ -18,6 +18,5 @@ var userSchema = mongoose.Schema({
     createdOn: {type: Date, default: new Date()}
 });
 
-// User.model = db.getMongoConnection().model('user',userSchema);
-User.model = db.getHerokuMongoConnnection().model('user',userSchema);
+ User.model = db.getMongoConnection().model('user',userSchema);
 module.exports = User;

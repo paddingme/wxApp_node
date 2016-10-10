@@ -12,9 +12,18 @@ var Logger = bunyan.createLogger({
         {
             level: 'info',
             stream: process.stdout
+            //stream:path.resolve(__dirname,'../logs/log.log')
         },
         {
             level: 'error',
+            path: path.resolve(__dirname,'../logs/mongooseError.log')
+        },
+        {
+            level: 'warn',
+            path: path.resolve(__dirname,'../logs/redisError.log')
+        },
+        {
+            level: 'fatal',
             path: path.resolve(__dirname,'../logs/webError.log')
         }
     ]
