@@ -27,23 +27,27 @@ function getMongoConnection(){
     }
 }
 
-function getMongoLogConnection(){
+function registerModels(){
     var opts = currentConfig.mongo.wxApp_xuXuanHui_log.opts;
     var host = currentConfig.mongo.wxApp_xuXuanHui_log.host;
     var port = currentConfig.mongo.wxApp_xuXuanHui_log.port;
     var db   = currentConfig.mongo.wxApp_xuXuanHui_log.db;
     var mongoCon =  mongoose.createConnection(host, db, port, opts);
-    if(mongoCon){
-        return mongoCon;
-    }else if(currentConfig.log=="file"){
-        //ToDo:记录链接失败日志
-        console.log("connection failed");
-    }
+    mongoCon.once('open',function (err) {
+        if(err&&currentConfig.log=="file"){
+            //ToDo:记录链接失败日志
+            console.log("connection failed");
+        }else{
+            //Todo:注册models
+        }
+    });
+
     mongoCon.on('error',function(){
         console.log("Error:failed to create connection to DB 'wxApp_xuXuanHui_log' server");
     });
+
 }
-function getRedisClient(){
+function getRedisClient(callback){
 
     var client = redis.createClient(currentConfig.redis.port,currentConfig.redis.host);
 
@@ -67,7 +71,7 @@ function getRedisClient(){
             //ToDo:记录日志
         }
     });
-    return client;
+    callback(client);
 
 }
 
