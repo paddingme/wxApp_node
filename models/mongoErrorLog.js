@@ -19,5 +19,5 @@ var mongoErrorLogSchema = mongoose.Schema({
     msg: {type: String, required: true, trim: true},
     errorDetail: {type: String, required: true, trim: true}
 });
-mongoErrorLog.model = db.getMongoLogConnection().model('mongoErrorLog',mongoErrorLogSchema);
+mongoErrorLog.model = db.getMongoLogConnection().model('mongoErrorLog');
 module.exports =mongoErrorLog;
