@@ -5,8 +5,9 @@ var mongoose = require('mongoose'),
     redis     = require('redis'),
     config    = require('./config');
 
-var currentConfig = process.env.currentEnv=='dev'?config.dev:config.proc;
-
+var currentConfig = config.test;
+// var currentConfig = config.dev;
+// var currentConfig = config.proc;
 
 function getMongoConnection(){
     var opts = currentConfig.mongo.wxApp_xuXuanHui.opts;
@@ -45,6 +46,7 @@ function getMongoLogConnection(){
 function getRedisClient(){
 
     var client = redis.createClient(currentConfig.redis.port,currentConfig.redis.host);
+
     client.auth(currentConfig.redis.password,function(err){
         if(err){
             console.log("Error:redis server auth failed");
@@ -58,6 +60,11 @@ function getRedisClient(){
             if(getMongoConnection()){
                 //ToDo:保存redis链接错误日志到数据库
             }
+        }
+    });
+    client.select(currentConfig.redis.db,function (err) {
+        if(err){
+            //ToDo:记录日志
         }
     });
     return client;

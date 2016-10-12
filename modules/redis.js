@@ -2,8 +2,7 @@
  * Created  on 10/4/2016.
  */
 
-//var client = require('../db').redisClient;
-var client = require('../db').getHerokuRedisClient;
+var client = require('../db').getRedisClient;
 
 function RedisOperator(){}
 
@@ -24,7 +23,9 @@ RedisOperator.setString = function(key,value){
         if(err){
             //ToDO: 记录日志
         }
+        client.quit();
     })
 };
 
 module.exports = RedisOperator;
+

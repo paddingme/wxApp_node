@@ -7,13 +7,6 @@ var path            = require('path'),
     registerEventListener = require('./serverEventListener'),
     logger          = require('./modules').log.logger;
 
-
-//set node env
-//process.env.currentEnv = 'proc';
-process.env.currentEnv = 'dev';
-
-
-
 //create server
 var server = restify.createServer({
     //certificate: fs.readFileSync('path/to/server/certificate'),
