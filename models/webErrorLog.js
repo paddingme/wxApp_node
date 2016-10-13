@@ -1,9 +1,6 @@
 /**
  * Created  on 10/5/2016.
  */
-/**
- * Created  on 10/5/2016.
- */
 
 var mongoose = require("mongoose"),
     db = require('../db');
