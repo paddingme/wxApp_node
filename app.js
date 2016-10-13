@@ -2,6 +2,8 @@ var path            = require('path'),
     restify         = require('restify'),
     fs              = require('fs'),
     async           = require('async'),
+    registerWxAppModels = require('./db').regiXuxuanhuiModels,
+    registerWxAppLogModels = require('./db').regiXuxuanhuiLogModels,
     registerPlugins = require('./plugins'),
     initRoute       = require('./routes'),
     registerEventListener = require('./serverEventListener'),
@@ -18,6 +20,12 @@ var server = restify.createServer({
 
 
 async.series({
+
+    //register mongodb models
+    models:function (cb) {
+        registerWxAppModels();
+        registerWxAppLogModels();
+    },
     //register server plugins
     plugins:function(cb){
         registerPlugins(server);

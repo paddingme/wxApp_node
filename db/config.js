@@ -32,7 +32,7 @@ module.exports = {
 
         },
         //打印日志输出
-        log: "stdout"
+        logType: "stdout"
     },
     proc: {
         mongo: {
@@ -63,7 +63,7 @@ module.exports = {
             db:1
         },
         //日志存储到数据库中
-        log: "db"
+        logType: "db"
         //日志存储到文件中
         //log:'file'
     },
@@ -96,6 +96,6 @@ module.exports = {
             db:1
         },
         //打印日志输出
-        log: "db"
+        logType: "db"
     }
 };

@@ -3,7 +3,7 @@
  */
 var bunyan = require('bunyan'),
     path    = require('path'),
-    logType = require('../db').logType;
+    logType = require('../db').currentConfig.logType;
 
 var Logger = bunyan.createLogger({
     name: "WXApp_xuXuanHui",

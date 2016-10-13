@@ -8,7 +8,7 @@
 var mongoose = require("mongoose"),
     db = require('../db');
 
-function webErrorLog(){}
+function WebErrorLog(){}
 var webErrorSchema = mongoose.Schema({
     name: {type: String, required: true, trim: true},
     hostname: {type: String, required: true, trim: true},
@@ -27,5 +27,6 @@ var webErrorSchema = mongoose.Schema({
     openId:{type:String,required:true,trim:true},
     isVisitor:{type:Number,required:true,trim:true}//是否是游客  1 注册用户 0 游客
 });
-webErrorLog.model = db.getMongoLogConnection().model('webErrorLog',webErrorSchema);
-module.exports = webErrorLog;
+WebErrorLog.model = db.getMongoLogConnection().model('webErrorLog');
+WebErrorLog.schema = webErrorSchema;
+module.exports = WebErrorLog;

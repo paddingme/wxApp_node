@@ -2,7 +2,6 @@
  * Created  on 10/2/2016.
  */
 var mongoose = require('mongoose'),
-    redis     = require('redis'),
     async     = require('async'),
     models    = require('../models'),
     config    = require('./config');
@@ -11,7 +10,7 @@ var currentConfig = config.test;
 // var currentConfig = config.dev;
 // var currentConfig = config.proc;
 
-function getMongoConnection(){
+function registerWxAppXuxuanhuiModels(){
     var opts = currentConfig.mongo.wxApp_xuXuanHui.opts;
     var host = currentConfig.mongo.wxApp_xuXuanHui.host;
     var port = currentConfig.mongo.wxApp_xuXuanHui.port;
@@ -31,7 +30,7 @@ function getMongoConnection(){
     });
 }
 
-function getMongoLogConnection(){
+function registerWxAppXuxuanhuiLogModels(){
     var opts = currentConfig.mongo.wxApp_xuXuanHui_log.opts;
     var host = currentConfig.mongo.wxApp_xuXuanHui_log.host;
     var port = currentConfig.mongo.wxApp_xuXuanHui_log.port;
@@ -52,38 +51,37 @@ function getMongoLogConnection(){
 
 }
 
-function getRedisClient(callback){
 
-    var client = redis.createClient(currentConfig.redis.port,currentConfig.redis.host);
-
-    client.auth(currentConfig.redis.password,function(err){
-        if(err){
-            console.log("Error:redis server auth failed");
-        }
+function getMongoConnection() {
+    var opts = currentConfig.mongo.wxApp_xuXuanHui.opts;
+    var host = currentConfig.mongo.wxApp_xuXuanHui.host;
+    var port = currentConfig.mongo.wxApp_xuXuanHui.port;
+    var db   = currentConfig.mongo.wxApp_xuXuanHui.db;
+    var mongoCon =  mongoose.createConnection(host, db, port, opts);
+    mongoCon.on('error',function(){
+        console.log("Error:failed to create connection to DB 'wxApp_xuXuanHui' server");
     });
-    client.on('error',function(){
-        console.log("Error:failed to connect redis server");
-        if(currentConfig.log=='file'){
-            //ToDo:记录日志
-        }else{
-            if(getMongoConnection()){
-                //ToDo:保存redis链接错误日志到数据库
-            }
-        }
+    return mongoCon;
+}
+function getMongoLogConnection() {
+    var opts = currentConfig.mongo.wxApp_xuXuanHui.opts;
+    var host = currentConfig.mongo.wxApp_xuXuanHui.host;
+    var port = currentConfig.mongo.wxApp_xuXuanHui.port;
+    var db   = currentConfig.mongo.wxApp_xuXuanHui.db;
+    var mongoLogCon =  mongoose.createConnection(host, db, port, opts);
+    mongoLogCon.on('error',function(){
+        console.log("Error:failed to create connection to DB 'wxApp_xuXuanHui' server");
     });
-    client.select(currentConfig.redis.db,function (err) {
-        if(err){
-            //ToDo:记录日志
-        }
-    });
-    callback(client);
-
+    return mongoLogCon;
 }
 
 
+
+
 module.exports = {
+    regiXuxuanhuiModels:registerWxAppXuxuanhuiModels,
+    regiXuxuanhuiLogModels:registerWxAppXuxuanhuiLogModels,
     getMongoConnection:getMongoConnection,
     getMongoLogConnection:getMongoLogConnection,
-    getRedisClient:getRedisClient,
-    logType :currentConfig.log
+    currentConfig :currentConfig
 };

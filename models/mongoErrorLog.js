@@ -4,7 +4,8 @@
 var mongoose = require("mongoose"),
     db = require('../db');
 
-function mongoErrorLog(){}
+function MongoErrorLog(){}
+
 var mongoErrorLogSchema = mongoose.Schema({
     name: {type: String, required: true, trim: true},
     hostname: {type: String, required: true, trim: true},
@@ -19,5 +20,6 @@ var mongoErrorLogSchema = mongoose.Schema({
     msg: {type: String, required: true, trim: true},
     errorDetail: {type: String, required: true, trim: true}
 });
-mongoErrorLog.model = db.getMongoLogConnection().model('mongoErrorLog');
-module.exports =mongoErrorLog;
+MongoErrorLog.model = db.getMongoLogConnection().model('mongoErrorLog');
+MongoErrorLog.schema = mongoErrorLogSchema;
+module.exports =MongoErrorLog;
