@@ -2,8 +2,7 @@ var path            = require('path'),
     restify         = require('restify'),
     fs              = require('fs'),
     async           = require('async'),
-    registerWxAppModels = require('./db').regiXuxuanhuiModels,
-    registerWxAppLogModels = require('./db').regiXuxuanhuiLogModels,
+    registerModels = require('./db').regiModels,
     registerPlugins = require('./plugins'),
     initRoute       = require('./routes'),
     registerEventListener = require('./serverEventListener'),
@@ -23,8 +22,10 @@ async.series({
 
     //register mongodb models
     models:function (cb) {
-        registerWxAppModels();
-        registerWxAppLogModels();
+
+        registerModels();
+        console.log('models regitered...');
+        cb(null);
     },
     //register server plugins
     plugins:function(cb){
