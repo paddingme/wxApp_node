@@ -17,6 +17,6 @@ var userSchema = mongoose.Schema({
     flag: {type: Number, required: true, trim: true},
     createdOn: {type: Date, default: new Date()}
 });
-User.model = db.getMongoConnection().model('user',userSchema);
+//User.model = db.getMongoConnection().model('user',userSchema);
 User.schema = userSchema;
 module.exports = User;

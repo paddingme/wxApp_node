@@ -24,6 +24,6 @@ var logSchema = mongoose.Schema({
     isVisitor:{type:Number,required:true,trim:true}//是否是游客  1 注册用户 0 游客
 });
 
-Log.model = db.getMongoLogConnection().model('log',logSchema);
+//Log.model = db.getMongoLogConnection().model('log');
 Log.schema = logSchema;
 module.exports = Log;

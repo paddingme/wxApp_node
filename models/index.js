@@ -41,7 +41,7 @@ function registerModels(){
                 cb(null);
             },function(err){
                 if(!err){
-                    console.log('mongo models has registered completed...');
+                    console.log('mongo WxApp models has registered completed...');
                 }
             })
         }
@@ -53,11 +53,19 @@ function registerModels(){
     var logDb   = currentConfig.mongo.wxApp_xuXuanHui_log.db;
     var mongoLogConn =  mongoose.createConnection(logHost, logDb, logPort, logOpts);
     mongoLogConn.once('open',function (err) {
-        if(err&&currentConfig.log=="file"){
+        if(err&&currentConfig.logType=="file"){
             //ToDo:记录链接失败日志
             console.log("connection failed");
         }else{
             //Todo:注册models
+            async.each(modelsMap.wxApp_xuXuanHui_log,function(item,cb){
+                mongoLogConn.model(item.modelName,item.schema);
+                cb(null);
+            },function(err){
+                if(!err){
+                    console.log('mongo WxAppLog models has registered completed...');
+                }
+            })
         }
     });
 

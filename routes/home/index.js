@@ -6,11 +6,13 @@ var async    = require('async'),
     login    = require('./login'),
     signIn   = require('./signIn'),
     signOut  = require('./signOut');
-
+var createUsr = require('../../modules/testMongo');
 module.exports = function(server){
     server.post('/login',login);
     server.get('/',function(req,res,next){
+
         res.send('hello restify...');
+        createUsr();
         next();
     })
 };
