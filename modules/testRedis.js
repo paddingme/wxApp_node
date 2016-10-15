@@ -3,3 +3,4 @@
  */
 
 var redisClient = require("./redis");
+redisClient.setString("hello","world");

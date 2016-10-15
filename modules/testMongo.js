@@ -2,7 +2,7 @@
  * Created by bas on 2016/10/11.
  */
 
-var userModel = require('../db/index').getMongoConnection().model("user");
+var userModel = require('../models/user').model;
 userModel.create({
     openId: "fewrgrefgresf",
     nickName: "test",
