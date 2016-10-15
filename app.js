@@ -2,10 +2,10 @@ var path            = require('path'),
     restify         = require('restify'),
     fs              = require('fs'),
     async           = require('async'),
-    registerModels = require('./db').regiModels,
+    registerModels  = require('./db').regiModels,
     registerPlugins = require('./plugins'),
     initRoute       = require('./routes'),
-    registerEventListener = require('./serverEventListener'),
+    registerServerEventListener = require('./serverEventListener'),
     logger          = require('./modules').log.logger;
 
 //create server
@@ -22,9 +22,7 @@ async.series({
 
     //register mongodb models
     models:function (cb) {
-
         registerModels();
-        console.log('models regitered...');
         cb(null);
     },
     //register server plugins
@@ -34,7 +32,7 @@ async.series({
     },
     //register server event listener
     listener: function (cb) {
-        registerEventListener(server);
+        registerServerEventListener(server);
         cb(null);
     },
     //initial server routes

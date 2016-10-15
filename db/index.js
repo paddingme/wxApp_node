@@ -6,8 +6,8 @@ var mongoose = require('mongoose'),
     models    = require('../models'),
     config    = require('./config');
 
-var currentConfig = config.test;
-// var currentConfig = config.dev;
+//var currentConfig = config.test;
+ var currentConfig = config.dev;
 // var currentConfig = config.proc;
 
 function registerModels(){
@@ -30,7 +30,7 @@ function registerModels(){
                 cb(null);
             },function(err){
                 if(!err){
-                    console.log('models has registered completed...');
+                    console.log('mongo models has registered completed...');
                 }
             })
         }
@@ -66,6 +66,7 @@ function getMongoConnection() {
     mongoCon.on('error',function(){
         console.log("Error:failed to create connection to DB 'wxApp_xuXuanHui' server");
     });
+    console.log("get a wxApp connnection ");
     return mongoCon;
 }
 function getMongoLogConnection() {
@@ -77,6 +78,7 @@ function getMongoLogConnection() {
     mongoLogCon.on('error',function(){
         console.log("Error:failed to create connection to DB 'wxApp_xuXuanHui' server");
     });
+    console.log('get a wxAppLog connection');
     return mongoLogCon;
 }
 
