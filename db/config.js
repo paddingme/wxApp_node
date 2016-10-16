@@ -4,25 +4,8 @@
 module.exports = {
     dev: {
         mongo: {
-            wxApp_xuXuanHui:{
-                host: "127.0.0.1",
-                port: "27017",
-                db: "wxApp_xuXuanHui",
-                opts: {
-                    user: "",
-                    pass: "",
-                    poolSize: 6
-                }
-            },
-            wxApp_xuXuanHui_log:{
-                host: "127.0.0.1",
-                port: "27017",
-                db: "wxApp_xuXuanHui_log",
-                opts: {
-                    user: "",
-                    pass: ""
-                }
-            }
+            wxApp_xuXuanHui:"mongodb://127.0.0.1/wxApp_xuXuanHui",
+            wxApp_xuXuanHui_log:"mongodb://127.0.0.1/wxApp_xuXuanHui_log"
         },
         redis: {
             host: '127.0.0.1',

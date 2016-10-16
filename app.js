@@ -2,9 +2,9 @@ var path            = require('path'),
     restify         = require('restify'),
     fs              = require('fs'),
     async           = require('async'),
-    registerModels  = require('./models').regiModels,
+    models  = require('./models'),
+    db              = require('./db'),
     registerPlugins = require('./plugins'),
-    initRoute       = require('./routes'),
     registerServerEventListener = require('./serverEventListener'),
     logger          = require('./modules').log.logger;
 
@@ -17,7 +17,59 @@ var server = restify.createServer({
     //formatters:''
 });
 
+function registerModels(){
 
+    //var opts = currentConfig.mongo.wxApp_xuXuanHui.opts;
+    //var host = currentConfig.mongo.wxApp_xuXuanHui.host;
+    //var port = currentConfig.mongo.wxApp_xuXuanHui.port;
+    //var db   = currentConfig.mongo.wxApp_xuXuanHui.db;
+    //var mongoCon =  mongoose.createConnection(host, db, port, opts);
+    //mongoCon.on('error',function(){
+    //    console.log("Error:failed to create connection to DB 'wxApp_xuXuanHui' server");
+    //});
+    //mongoCon.once('open',function (err) {
+    //    if(err&&currentConfig.log=="file"){
+    //        //ToDo:记录链接失败日志
+    //        console.log("connection failed");
+    //    }else{
+    async.each(models.wxApp_xuXuanHui,function(item,cb){
+        db.getMongoConnection.model(item.modelName,item.schema);
+        cb(null);
+    },function(err){
+        if(!err){
+            console.log('mongo WxApp models has registered completed...');
+        }
+    });
+    //    }
+    //});
+    //
+    //var logOpts = currentConfig.mongo.wxApp_xuXuanHui_log.opts;
+    //var logHost = currentConfig.mongo.wxApp_xuXuanHui_log.host;
+    //var logPort = currentConfig.mongo.wxApp_xuXuanHui_log.port;
+    //var logDb   = currentConfig.mongo.wxApp_xuXuanHui_log.db;
+    //var mongoLogConn =  mongoose.createConnection(logHost, logDb, logPort, logOpts);
+    //mongoLogConn.once('open',function (err) {
+    //    if(err&&currentConfig.logType=="file"){
+    //        //ToDo:记录链接失败日志
+    //        console.log("connection failed");
+    //    }else{
+    //Todo:注册models
+    async.each(models.wxApp_xuXuanHui_log,function(item,cb){
+        db.getMongoLogConnection.model(item.modelName,item.schema);
+        cb(null);
+    },function(err){
+        if(!err){
+            console.log('mongo WxAppLog models has registered completed...');
+        }
+    });
+    //    }
+    //});
+    //
+    //mongoLogConn.on('error',function(){
+    //    console.log("Error:failed to create connection to DB 'wxApp_xuXuanHui_log' server");
+    //});
+
+}
 async.series({
 
     //register mongodb models
@@ -37,7 +89,8 @@ async.series({
     },
     //initial server routes
     routes:function(cb){
-        initRoute(server);
+        require('./routes')(server);
+        //initRoute(server);
         cb(null);
     }
     

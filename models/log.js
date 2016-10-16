@@ -2,10 +2,8 @@
  * Created  on 10/5/2016.
  */
 
-var mongoose = require("mongoose"),
-    db = require('../db');
+var mongoose = require("mongoose");
 
-function Log(){}
 var logSchema = mongoose.Schema({
     name: {type: String, required: true, trim: true},
     hostname: {type: String, required: true, trim: true},
@@ -24,6 +22,4 @@ var logSchema = mongoose.Schema({
     isVisitor:{type:Number,required:true,trim:true}//是否是游客  1 注册用户 0 游客
 });
 
-//Log.model = db.getMongoLogConnection().model('log');
-Log.schema = logSchema;
-module.exports = Log;
+module.exports = logSchema;

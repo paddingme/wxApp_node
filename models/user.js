@@ -1,10 +1,8 @@
 /**
  * Created  on 10/3/2016.
  */
-var mongoose = require('mongoose'),
-    db = require('../db');
+var mongoose = require('mongoose');
 
-function User(){}
 var userSchema = mongoose.Schema({
     openId: {type: String, required: true, trim: true},
     nickName: {type: String, required: true, trim: true},
@@ -17,6 +15,4 @@ var userSchema = mongoose.Schema({
     flag: {type: Number, required: true, trim: true},
     createdOn: {type: Date, default: new Date()}
 });
-//User.model = db.getMongoConnection().model('user',userSchema);
-User.schema = userSchema;
-module.exports = User;
+module.exports = userSchema;
