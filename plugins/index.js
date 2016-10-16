@@ -37,5 +37,6 @@ module.exports = function(server){
         }
     }));
     server.use(restify.conditionalRequest());
-    console.log('---- server plugins have been registered  ----');
+
+    console.log('2.--->server plugins have been registered.');
 };

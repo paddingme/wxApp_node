@@ -4,10 +4,7 @@
 /**
  * Created  on 10/5/2016.
  */
-var mongoose = require("mongoose"),
-    db = require('../db');
-
-function redisErrorLog(){}
+var mongoose = require("mongoose");
 var redisErrorLogSchema = mongoose.Schema({
     name: {type: String, required: true, trim: true},
     hostname: {type: String, required: true, trim: true},
@@ -21,6 +18,5 @@ var redisErrorLogSchema = mongoose.Schema({
     msg: {type: String, required: true, trim: true},
     errorDetail: {type: String, required: true, trim: true}
 });
-redisErrorLog.model = db.getMongoLogConnection().model('mongoErrorLog',redisErrorLogSchema);
-module.exports = redisErrorLog;
+module.exports = redisErrorLogSchema;
 

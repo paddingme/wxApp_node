@@ -24,7 +24,7 @@ module.exports = function(server){
         //    cb(null);
         }],function(err){
         if(!err){
-            console.log('------   server routes registered completed  -----');
+            console.log('4.--->server routes initialize completely.');
         }
     })
 };

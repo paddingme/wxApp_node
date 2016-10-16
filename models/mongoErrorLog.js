@@ -1,11 +1,7 @@
 /**
  * Created  on 10/5/2016.
  */
-var mongoose = require("mongoose"),
-    db = require('../db');
-
-function MongoErrorLog(){}
-
+var mongoose = require("mongoose");
 var mongoErrorLogSchema = mongoose.Schema({
     name: {type: String, required: true, trim: true},
     hostname: {type: String, required: true, trim: true},
@@ -20,6 +16,4 @@ var mongoErrorLogSchema = mongoose.Schema({
     msg: {type: String, required: true, trim: true},
     errorDetail: {type: String, required: true, trim: true}
 });
-//MongoErrorLog.model = db.getMongoLogConnection().model('mongoErrorLog');
-MongoErrorLog.schema = mongoErrorLogSchema;
-module.exports =MongoErrorLog;
+module.exports =mongoErrorLogSchema;

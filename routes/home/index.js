@@ -7,7 +7,7 @@ var async    = require('async'),
     signIn   = require('./signIn'),
     signOut  = require('./signOut');
 var db = require('../../db');
-var userModel = db.getMongoConnection.model('user');
+var userModel = db.wxApp_xuXuanHuiConnection.model('user');
 
 function createUser(){
     userModel.create({

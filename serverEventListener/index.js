@@ -32,5 +32,5 @@ module .exports = function(server){
     });
     //handle uncaughtException event
     server.on('uncaughtException',serverEventHandler.uncaughtExceptionHandler);
-    console.log("------ server's events are listening. -----")
+    console.log("3.--->server events are listening.")
 };
